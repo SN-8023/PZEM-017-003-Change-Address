@@ -10,9 +10,9 @@ NODE                =   248                 # Die derzeitige Adresse, alternativ
 DEVICE              =   '/dev/ttyUSB0'      # Muss gegebenenfalls angepasst werden
 
 # Konfiguration PZEM
-PZ                  =   minimalmodbus.Instrument(DEVICE, NODE)
+PZ                  =   minimalmodbus.Instrument(DEVICE, NODE,debug=1)
 PZ.serial.baudrate  =   9600
-PZ.serial.timeout   =   0.5
+PZ.serial.timeout   =   1
 PZ.serial.bytesize  =   8
 PZ.serial.parity    =   minimalmodbus.serial.PARITY_NONE
 PZ.serial.stopbits  =   2
@@ -22,16 +22,25 @@ PZ2                 =   minimalmodbus.Instrument(DEVICE, CHANGE_TO_ADDRESS)
 print('Adresse',NODE ,'wird geändert auf',CHANGE_TO_ADDRESS,'.' )
 
 PZ.write_register(2,CHANGE_TO_ADDRESS,0,6)
-sleep(1)
-
+sleep(2)
+x = 0
 while 1:
-    x = 0
     try:
-        print(PZ2.read_registers(0,7,4))
+        Shunts      =   ["100 A","50 A","200 A","300 A"]
+        data        =   PZ2.read_registers(0,4,3)
+        print("\n High Voltage alarm  : ",(data[0] * 0.01), "V\n",
+              "Low Voltage alarm   : ",   (data[1] * 0.01), "V\n",
+              "Modbus-RTU Address  : ",   data[2],           "\n",
+              "Current Range (017) : ",   Shunts[data[3]],   "\n")
+        
         print('Erfogreich umgestellt.')
         break
     except:
         x = x + 1
+        sleep(1)
         if x >= 5:
            print('Gerät antwortet nicht. :( ')
            break
+
+# def FZEM_reset():
+#    PZ._performCommand(66, '')
