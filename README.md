@@ -44,15 +44,15 @@ Die Schnittstelle ist
  Parity :                    keine
 
 Die PZEM unterstützen folgene Funktions Codes:
- 0x03(3)   Read Holding Register 
- 0x04(4)   Read Input Register 
- 0x06(6)   Write Single Register 
- 0x41(65)  Calibration (nur über Adresse 0xF8 nutzbar) 
+ 0x03(3)   Lesen der Konfigurations Register  
+ 0x04(4)   Lesen der Messwert Register
+ 0x06(6)   Schreiben der Konfigurations Register 
+ 0x41(65)  Kallibierung (nur über Adresse 0xF8 nutzbar) 
  0x42(66)  Reset Verbrauchszähler
 
 Die Adresse kann zwischen 
  0x01(1) und 0xF7(247) festgelegt werden. 
- 0x00(0) ist die Broadcastadresse 
+ 0x00(0) ist die Broadcastadresse und 
  0xF8(248) kann benutzt werden um die PZEM anzuspechen, wenn nur EIN Gerät am Bus hängt. Nützlich 
  um Geräte zu konfigurieren oder wenn sowieso nur ein Gerät vorhanden ist.
 
