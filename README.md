@@ -23,7 +23,7 @@ Leistung :  PZEM-003  0,1kW bis 3kW
             PZEM-017 0,2kW bis 90KW*
   Auflösung :                0,01W
   Messgemauigkeit :             1%           
-* abhängig vom verwendem Shunt (50, 100, 200, 300A)
+* abhängig vom verwendetem Shunt (50, 100, 200, 300A)
 
 Verbrauchsmessung :        0-9999kWh
   Auflösung :                   1Wh
